@@ -8,12 +8,12 @@ services:
     depends_on:
       - backend
 
-  # ui:
-  #   # image: 'scored-ui:latest'
-  #   build: ./scored-ui
-  #   container_name: ui
-  #   depends_on:
-  #     - backend
+  ui:
+    image: 'kevinvt/scored-ui:latest'
+    # build: ./scored-ui
+    container_name: ui
+    depends_on:
+      - backend
 
   backend:
     # build: ./scored-backend
