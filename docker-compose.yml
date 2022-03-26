@@ -7,20 +7,24 @@ services:
     container_name: bot
     depends_on:
       - backend
+    environment:
+      - API_URL=http://backend:8080
 
   ui:
     image: 'kevinvt/scored-ui:latest'
     container_name: ui
     depends_on:
       - backend
-    environment:
-      - API_URL=http://backend:8080
+    ports:
+      - 4200:80 # exposes the ui on port 4200
 
   backend:
     image: 'kevinvt/scored-backend:latest'
     container_name: backend
     depends_on:
       - db
+    ports:
+      - 8080:8080 # exposes the backend on port 8080
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
       - SPRING_DATASOURCE_USERNAME=compose-postgres
