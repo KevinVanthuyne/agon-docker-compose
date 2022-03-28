@@ -7,8 +7,6 @@ A Docker Compose file that runs all components of Scored application:
 * discord-competition-bot 
 * PostgreSQL database
 
-Just run `docker-compose up` to start everything.
-
 ## Configuration
 
 The following variables should be changed in order to provide good security:
@@ -24,3 +22,11 @@ The following variables should be changed in order to provide good security:
 - db
   - `POSTGRES_USER`
   - `POSTGRES_PASSWORD`
+
+## Deployment
+
+Just run `docker-compose up` to start everything.
+
+The following services will be exposed:
+- `ui` on port 4200
+- `backend` on port 8080
