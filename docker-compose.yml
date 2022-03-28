@@ -9,6 +9,8 @@ services:
       - backend
     environment:
       - API_URL=http://backend:8080
+      - API_USER_USERNAME=api-user 
+      - API_USER_PASSWORD=api-password # you should change this
 
   ui:
     image: 'kevinvt/scored-ui:latest'
@@ -30,6 +32,8 @@ services:
       - SPRING_DATASOURCE_USERNAME=compose-postgres
       - SPRING_DATASOURCE_PASSWORD=compose-postgres
       # - SPRING_JPA_HIBERNATE_DDL_AUTO=update # Should be uncommented for production
+      - API_USER_USERNAME=api-user 
+      - API_USER_PASSWORD=api-password # you should change this
 
   db:
     image: 'postgres:14.2-alpine'
