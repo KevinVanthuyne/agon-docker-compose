@@ -9,8 +9,8 @@ services:
       - backend
     environment:
       - API_URL=http://backend:8080
-      - API_USER_USERNAME=api-user
-      - API_USER_PASSWORD=api-password
+      - API_USER_USERNAME=${API_USER_USERNAME}
+      - API_USER_PASSWORD=${API_USER_USERNAME}
 
   ui:
     image: 'kevinvt/scored-ui:latest'
@@ -29,11 +29,11 @@ services:
       - 8080:8080 # exposes the backend on port 8080
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
-      - SPRING_DATASOURCE_USERNAME=compose-postgres
-      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       # - SPRING_JPA_HIBERNATE_DDL_AUTO=update # Should be uncommented for production
-      - API_USER_USERNAME=api-user
-      - API_USER_PASSWORD=api-password
+      - API_USER_USERNAME=${API_USER_USERNAME}
+      - API_USER_PASSWORD=${API_USER_USERNAME}
 
   db:
     image: 'postgres:14.2-alpine'
@@ -41,8 +41,8 @@ services:
     volumes:
       - scored-db:/var/lib/pgsql/data
     environment:
-      - POSTGRES_USER=compose-postgres
-      - POSTGRES_PASSWORD=compose-postgres
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
 
 volumes:
   scored-db:
