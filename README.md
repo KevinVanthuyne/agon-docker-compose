@@ -25,7 +25,10 @@ The following variables should be changed in order to provide good security:
 
 ## Deployment
 
-Just run `docker-compose up` to start everything.
+- Build the images of all components
+- Push all images to Docker Hub
+- Run `docker-compose pull` to make sure the latest images are present
+- Run `docker-compose up` to start everything
 
 The following services will be exposed:
 - `ui` on port 4200
