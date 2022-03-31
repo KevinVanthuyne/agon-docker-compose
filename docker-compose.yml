@@ -28,7 +28,7 @@ services:
     ports:
       - 8080:8080 # exposes the backend on port 8080
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/${DB_NAME}
       - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       # - SPRING_JPA_HIBERNATE_DDL_AUTO=update # Should be uncommented for production
@@ -41,6 +41,7 @@ services:
     volumes:
       - scored-db:/var/lib/pgsql/data
     environment:
+      - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
 
