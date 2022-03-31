@@ -9,7 +9,7 @@ A Docker Compose file that runs all components of Scored application:
 
 ## Configuration
 
-Open the `.env` file and change the credentials to some secure values.
+Rename the `.env.example` file to `.env` and change the credentials to some secure values.
 
 ## Deployment
 
