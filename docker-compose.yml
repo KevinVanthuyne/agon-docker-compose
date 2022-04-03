@@ -11,6 +11,7 @@ services:
       - API_URL=http://backend:8080
       - API_USER_USERNAME
       - API_USER_PASSWORD
+      - NODE_ENV
 
   ui:
     image: 'kevinvt/scored-ui:latest'
@@ -19,6 +20,8 @@ services:
       - backend
     ports:
       - 127.0.0.1:4200:80 # exposes the ui on port 4200 (only locally, not to the outside world)
+    # environment:
+    #   - NODE_ENV # NODE_ENV=production still fails when building Angular app
 
   backend:
     image: 'kevinvt/scored-backend:latest'
