@@ -29,6 +29,20 @@ The following services will be exposed:
 - `ui` on port 4200
 - `backend` on port 8080
 
+## Seeding the database
+
+The Spring backend can seed the database with initial data if a `data.sql` was included in the image.
+
+❗ **Make sure you ran the docker-compose regularly before doing this**  ❗
+
+Run the Docker Compose with an extra environment variable to trigger the seeding:
+
+```
+SPRING_PROFILES_ACTIVE=seed-db docker-compose up
+```
+
+This will insert the data. Make sure to stop the compose with `CTRL + C`  after everything has loaded and run it regularly afterwards. 
+
 ## Notes
 
 It's possible that the db service fails with the following error:
