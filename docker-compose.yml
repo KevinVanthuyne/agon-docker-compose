@@ -2,50 +2,50 @@ version: '3.9'
 
 services:
 
-  bot:
+  agon-bot:
     image: 'kevinvt/agon-discord-competition-bot:latest'
-    container_name: bot
+    container_name: agon-bot
     depends_on:
-      - backend
+      - agon-backend
     environment:
-      - API_URL=http://backend:8080
+      - API_URL=http://agon-backend:8080
       - API_USER_USERNAME
       - API_USER_PASSWORD
       - NODE_ENV
 
-  ui:
+  agon-ui:
     image: 'kevinvt/agon-ui:latest'
-    container_name: ui
+    container_name: agon-ui
     depends_on:
-      - backend
+      - agon-backend
     ports:
       - 127.0.0.1:4200:80 # exposes the ui on port 4200 (only locally, not to the outside world)
     # environment:
     #   - NODE_ENV # NODE_ENV=production still fails when building Angular app
 
-  backend:
+  agon-backend:
     image: 'kevinvt/agon-backend:latest'
-    container_name: backend
+    container_name: agon-backend
     depends_on:
-      - db
+      - agon-db
     ports:
       - 127.0.0.1:8080:8080 # exposes the backend on port 8080 (only locally, not to the outside world)
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/${DB_NAME}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://agon-db:5432/${DB_NAME}
       - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - API_USER_USERNAME
       - API_USER_PASSWORD
 
-  db:
+  agon-db:
     image: 'postgres:14.2-alpine'
-    container_name: db
+    container_name: agon-db
     volumes:
-      - agon-db:/var/lib/pgsql/data
+      - agon-db-volume:/var/lib/pgsql/data
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
 
 volumes:
-  agon-db:
+  agon-db-volume:

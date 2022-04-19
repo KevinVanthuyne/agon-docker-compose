@@ -50,6 +50,18 @@ SPRING_PROFILES_ACTIVE=seed-db docker-compose up
 
 This will insert the data. Make sure to stop the compose with `CTRL + C`  after everything has loaded and run it regularly afterwards. 
 
+## Backups
+
+The database volume can be backed up by running the following command, as described in the [Docker docs](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes):
+```
+docker run --rm -v agon-docker-compose_agon-db:/var/lib/pgsql/data -v $(pwd)/backups:/backup ubuntu tar cvf /backup/agon_db_backup.tar /var/lib/pgsql/data
+```
+
+To restore the volume, the following command can be executed:
+```
+docker run --rm -v agon-docker-compose_agon-db:/var/lib/pgsql/data -v $(pwd)/backups:/backup ubuntu bash -C "cd /var/lib/pgsql/data && tar xvf /backup/agon_db_backup.tar --strip 1"
+```
+
 ## Notes
 
 It's possible that the db service fails with the following error:
