@@ -3,7 +3,7 @@ version: '3.9'
 services:
 
   bot:
-    image: 'kevinvt/discord-competition-bot:latest'
+    image: 'kevinvt/agon-discord-competition-bot:latest'
     container_name: bot
     depends_on:
       - backend
@@ -14,7 +14,7 @@ services:
       - NODE_ENV
 
   ui:
-    image: 'kevinvt/scored-ui:latest'
+    image: 'kevinvt/agon-ui:latest'
     container_name: ui
     depends_on:
       - backend
@@ -24,7 +24,7 @@ services:
     #   - NODE_ENV # NODE_ENV=production still fails when building Angular app
 
   backend:
-    image: 'kevinvt/scored-backend:latest'
+    image: 'kevinvt/agon-backend:latest'
     container_name: backend
     depends_on:
       - db
@@ -41,11 +41,11 @@ services:
     image: 'postgres:14.2-alpine'
     container_name: db
     volumes:
-      - scored-db:/var/lib/pgsql/data
+      - agon-db:/var/lib/pgsql/data
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
 
 volumes:
-  scored-db:
+  agon-db:
