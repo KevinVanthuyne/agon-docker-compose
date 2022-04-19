@@ -1,9 +1,10 @@
 # Agon
 
-Agon is a collection of applications that allow to easily host an **automated competition** for different games over a user-defined period. 
+Agon makes it super easy to host an **automated competition** for different games over a user-defined period. 
 Users can post their own scores through a Discord Bot and see leaderboards in Discord or through a website in order to promote **competitiveness** between players in an **autonomous** way.
 
-Agon was originally created for a pinball competition where people play one pinball each month, but it translates perfectly to an arcade game competition or basically anything for which high scores can be achieved. Agon is generic, flexible and configurable to suit a lot of different needs.
+Agon was originally created for a pinball competition where people play one pinball machine each month, but it translates perfectly to an arcade game competition or basically anything for which high scores can be achieved. Agon is **generic, flexible and configurable** to suit a lot of different needs.
+
 ## Docker Compose
 
 This repository contains the Docker Compose file that runs all components of the Agon application:
