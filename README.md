@@ -33,8 +33,8 @@ For example, setting `NODE_ENV` to `development` instead of `production`.
 - Run `docker-compose down` to stop all services
 
 The following services will be exposed:
-- `ui` on port 4200
-- `backend` on port 8080
+- `agon-ui` on port 4200
+- `agon-backend` on port 8080
 
 ## Seeding the database
 
@@ -52,14 +52,14 @@ This will insert the data. Make sure to stop the compose with `CTRL + C`  after 
 
 ## Backups
 
-The database volume can be backed up by running the following command, as described in the [Docker docs](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes):
+The database volume can be backed up by running the following command while the Docker Compose is running, as described in the [Docker docs](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes):
 ```
-docker run --rm -v agon-docker-compose_agon-db:/var/lib/pgsql/data -v $(pwd)/backups:/backup ubuntu tar cvf /backup/agon_db_backup.tar /var/lib/pgsql/data
+docker run --rm --volumes-from agon-db -v $(pwd)/backups:/backup ubuntu tar cvf /backup/agon-db-backup.tar /var/lib/pgsql/data
 ```
 
 To restore the volume, the following command can be executed:
 ```
-docker run --rm -v agon-docker-compose_agon-db:/var/lib/pgsql/data -v $(pwd)/backups:/backup ubuntu bash -C "cd /var/lib/pgsql/data && tar xvf /backup/agon_db_backup.tar --strip 1"
+docker run --rm --volumes-from agon-db -v $(pwd)/backups:/backup ubuntu bash -c "cd /var/lib/pgsql/data && tar xvf /backup/agon-db-backup.tar --strip 1"
 ```
 
 ## Notes
@@ -70,7 +70,7 @@ FATAL:  password authentication failed for user "<DB_USERNAME>"
 ```
 What seems to be the problem is described in this comment: https://github.com/docker-library/postgres/issues/203#issuecomment-255200501
 
-The error occurs when changing the database username or password after the first initialization. Running the following command removes the `db` services and its volume, which fixes the error but also removes any data in that volume so be careful:
+The error occurs when changing the database username or password after the first initialization. Running the following command removes the `agon-db` services and its volume, which fixes the error but also removes any data in that volume so be careful:
 ```
-docker-compose rm -fv db
+docker-compose rm -fv agon-db
 ``` 
