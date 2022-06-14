@@ -12,6 +12,8 @@ services:
       - API_USER_USERNAME
       - API_USER_PASSWORD
       - NODE_ENV
+      - BOT_TOKEN
+      - CLIENT_ID=${BOT_CLIENT_ID}
 
   agon-ui:
     image: 'kevinvt/agon-ui:latest'
