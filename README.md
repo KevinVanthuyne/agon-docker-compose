@@ -73,7 +73,11 @@ The database volume can be backed up by running the following command while the 
 docker run --rm --volumes-from agon-db -v $(pwd)/backups:/backup ubuntu tar cvf /backup/agon-db-backup.tar /var/lib/pgsql/data
 ```
 
-To restore the volume, the following command can be executed:
+This will create a `/backup` folder containing a backup tar on the location where the command is executed.
+
+To restore the volume someplace else, make sure to have ran `docker-compose up` and `docker-compose stop` once in order to make the database container to insert the data into. 
+
+After that the following command can be executed:
 ```
 docker run --rm --volumes-from agon-db -v $(pwd)/backups:/backup ubuntu bash -c "cd /var/lib/pgsql/data && tar xvf /backup/agon-db-backup.tar --strip 1"
 ```
