@@ -5,7 +5,14 @@ Users can post their own scores through a Discord Bot and see leaderboards in Di
 
 Agon was originally created for a pinball competition where people play one pinball machine each month, but it translates perfectly to an arcade game competition or basically anything for which high scores can be achieved. Agon is **generic, flexible and configurable** to suit a lot of different needs.
 
-## Docker Compose
+**Limitations**
+
+The way Agon is currently set up requires one application cluster to run per Discord server or competition and have a Discord application/bot per cluster. 
+This is because the backend only stores a single set of users, games and scores, meaning it only stores data of a single competition. 
+This is sufficient for my usecase but it would be nice to be able to run multiple competition across multiple Discord servers all from a single backend. 
+That would require quite some extra effort though so I won't implement that just yet.
+
+# Agon Docker Compose
 
 This repository contains the Docker Compose file that runs all components of the Agon application:
 
