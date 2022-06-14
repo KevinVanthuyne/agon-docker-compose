@@ -32,16 +32,25 @@ For example, setting `NODE_ENV` to `development` instead of `production`.
 
 ## Deployment
 
+### First deployment
+
 - Build the images of all components
 - Push all images to Docker Hub
 - Run `docker-compose pull` to make sure the latest images are present
 - Run `docker-compose up -d` to start everything
   - This will use the default `.env` file. Run `docker-compose --env-file .env.dev up` to use the development environment
-- Run `docker-compose down` to stop all services
+- Run `docker-compose stop` to stop all services
 
 The following services will be exposed:
 - `agon-ui` on port 4200
 - `agon-backend` on port 8080
+
+❗ Be careful **not to use** `docker-compose down` to stop the services because the volume that contains all data will be deleted as well ❗
+
+### Updating the running containers
+
+- Run `docker-compose pull` to retrieve the latest images
+- Run `docker-compose up -d` to run the services with their updated images
 
 ## Seeding the database
 
