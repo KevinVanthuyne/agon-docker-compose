@@ -2,18 +2,20 @@ version: '3.9'
 
 services:
 
-  agon-bot:
-    image: 'kevinvt/agon-discord-competition-bot:latest'
-    container_name: agon-bot
-    depends_on:
-      - agon-backend
-    environment:
-      - API_URL=http://agon-backend:8080
-      - API_USER_USERNAME
-      - API_USER_PASSWORD
-      - NODE_ENV
-      - BOT_TOKEN
-      - CLIENT_ID=${BOT_CLIENT_ID}
+# Discord bot is disabled for now as it's not relevant anymore
+
+#  agon-bot:
+#    image: 'kevinvt/agon-discord-competition-bot:latest'
+#    container_name: agon-bot
+#    depends_on:
+#      - agon-backend
+#    environment:
+#      - API_URL=http://agon-backend:8080
+#      - API_USER_USERNAME
+#      - API_USER_PASSWORD
+#      - NODE_ENV
+#      - BOT_TOKEN
+#      - CLIENT_ID=${BOT_CLIENT_ID}
 
   agon-ui:
     image: 'kevinvt/agon-ui:latest'
@@ -21,7 +23,7 @@ services:
     depends_on:
       - agon-backend
     ports:
-      - 127.0.0.1:4200:80 # exposes the ui on port 4200 (only locally, not to the outside world)
+      - "127.0.0.1:4200:80" # exposes the ui on port 4200 (only locally, not to the outside world)
     # environment:
     #   - NODE_ENV # NODE_ENV=production still fails when building Angular app
 
@@ -31,7 +33,7 @@ services:
     depends_on:
       - agon-db
     ports:
-      - 127.0.0.1:8080:8080 # exposes the backend on port 8080 (only locally, not to the outside world)
+      - "127.0.0.1:8080:8080" # exposes the backend on port 8080 (only locally, not to the outside world)
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://agon-db:5432/${DB_NAME}
       - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
