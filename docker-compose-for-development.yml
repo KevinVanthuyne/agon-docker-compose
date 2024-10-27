@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+
+  agon-db:
+    image: 'postgres:17.0-alpine'
+    container_name: agon-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=agon-db
+      - POSTGRES_USER=db-user
+      - POSTGRES_PASSWORD=db-password
+
+volumes:
+  agon-db-volume:
